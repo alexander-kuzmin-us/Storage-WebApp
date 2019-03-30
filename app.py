@@ -23,13 +23,13 @@ def about():
 #Show all Storages
 @app.route('/')
 @app.route('/storage/')
-def showstorages():
+def showStorages():
     storages = session.query(Storage).order_by(asc(Storage.name))
     return render_template("storages.html", storages = storages)
 
 #Create a new Storage
 @app.route('/storage/new', methods=['GET','POST'])
-def newstorage():
+def newStorage():
     if request.method == 'POST':
       newstorage = Storage(name = request.form['name'])
       session.add(newstorage)
@@ -42,7 +42,7 @@ def newstorage():
 
 #Edit a Storage
 @app.route('/storage/<int:storage_id>/edit/', methods = ['GET', 'POST'])
-def editstorage(storage_id):
+def editStorage(storage_id):
     editstorage = session.query(Storage).filter_by(id = storage_id).one()
     if request.method == 'POST':
       if request.form['name']:
@@ -50,34 +50,71 @@ def editstorage(storage_id):
         flash('Storage Successfully Edited %s' % editstorage.name)
         return redirect(url_for('showstorages'))
     else:
-    return render_template("editstorage.html")
+    return render_template("editstorage.html", storage = editstorage)
 
 #Delete a Storage
-@app.route('/storage/delete')
-def deletestorage():
-    return render_template("deletestorage.html")
+@app.route('/storage/<int:storage_id>/delete/', methods = ['GET','POST'])
+def deleteStorage(storage_id):
+    storagetodelete = session.query(Storage).filter_by(id = storage_id).one()
+  if request.method == 'POST':
+    session.delete(storagetodelete)
+    flash('%s Successfully Deleted' % storagetodelete.name)
+    session.commit()
+    return redirect(url_for('showstorages', storage_id = storage_id))
+else:
+    return render_template("deletestorage.html", storage = storagetodelete)
 
 #Show a Storage container
-@app.route('/storage/')
-@app.route('/storage/container')
-def showContainer():
-    return render_template("container.html")
+@app.route('/storage/<int:storage_id>/')
+@app.route('/storage/<int:storage_id>/container/')
+def showContainer(storage_id):
+    storage = session.query(Storage).filter_by(id = storage_id).one()
+    items = session.query(ContainerItem).filter_by(storage_id = storage_id).all()
+    return render_template("container.html", items = items, storage = storage)
 
 #Create a new item in the container
-@app.route('/storage/container/new')
-def newContainerItem():
-    return render_template("newcontaineritem.html")
+@app.route('/storage/<int:storage_id>/container/new', methods=['GET','POST'])
+def newContainerItem(storage_id):
+    storage = session.query(Storage).filter_by(id = storage_id).one()
+  if request.method == 'POST':
+      newItem = ContainerItem(name = request.form['name'], description = request.form['description'], storage_id = storage_id)
+      session.add(newItem)
+      session.commit()
+      flash('New Container %s Item Successfully Created' % (newItem.name))
+      return redirect(url_for('showContainer', storage_id = storage_id))
+  else:
+    return render_template("newcontaineritem.html", storage_id = storage_id)
 
 #Edit an item in the container
-@app.route('/storage/container/edit')
-def editContainerItem():
-    return render_template("editcontaineritem.html")
+@app.route('/storage/<int:storage_id>/container/<int:container_id>/edit',  methods=['GET','POST'])
+def editContainerItem(storage_id, container_id):
+    editedItem = session.query(ContainerItem).filter_by(id = container_id).one()
+    storage = session.query(Storage).filter_by(id = storage_id).one()
+    if request.method == 'POST':
+        if request.form['name']:
+            editedItem.name = request.form['name']
+        if request.form['description']:
+            editedItem.description = request.form['description']
+        session.add(editedItem)
+        session.commit()
+        flash('Container Item Successfully Edited')
+        return redirect(url_for('showContainer', storage_id = storage_id))
+    else:
+        return render_template('editcontaineritem.html', storage_id = storage_id, container_id = container_id, item = editedItem)
 
 
 #Delete an item in the container
-@app.route('/storage/container/delete')
-def deleteContainerItem():
-    return render_template("deletecontaineritem.html")
+@app.route('/storage/<int:storage_id>/container/<int:container_id>/delete', methods = ['GET','POST'])
+def deleteContainerItem(storage_id, container_id):
+    storage = session.query(Storage).filter_by(id = storage_id).one()
+    itemToDelete = session.query(ContainerItem).filter_by(id = container_id).one()
+    if request.method == 'POST':
+        session.delete(itemToDelete)
+        session.commit()
+        flash('Container Item Successfully Deleted')
+        return redirect(url_for('showContainer', storage_id = storage_id))
+    else:
+        return render_template('deletecontaineritem.html', item = itemToDelete)
 
 
 if __name__=="__main__":
