@@ -1,10 +1,27 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect,jsonify, url_for, flash
 
 app=Flask(__name__)
 
+@app.route('/login')
+def login():
+    return render_template ("login.html")
+
+#Show all Storages
 @app.route('/')
-def home():
-    return render_template ("home.html")
+@app.route('/storage/')
+def storages():
+  return render_template("storages.html")
+
+#Create a new Storage
+@app.route('/storage/new')
+def newstorage():
+  return render_template("newstorage.html")
+
+#Edit a Storage
+@app.route('/storage/edit')
+def editstorage():
+  return render_template("editstorage.html")
+
 
 @app.route('/about/')
 def about():

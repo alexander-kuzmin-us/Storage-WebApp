@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <heade>
-  <title>Flask App</title>
+  <title>PUBLIC STORAGE</title>
   <link rel="stylesheet" href="{{url_for('static', filename='css/maim.css')}}">
 </head>
   <head>
-      <title>Flask App</title>
+      <title>PUBLIC STORAGE</title>
       <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
   </head>
   <body>
@@ -14,8 +14,9 @@
         <h1 class="logo">Public Storage</h1>
         <strong><nav>
           <ul class="menu">
-            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('storages') }}">Storages</a></li>
             <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
           </ul>
         </nav></strong>
       </div>
