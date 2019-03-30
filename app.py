@@ -5,6 +5,10 @@ app=Flask(__name__)
 @app.route('/login')
 def login():
     return render_template ("login.html")
+    
+@app.route('/about/')
+def about():
+    return render_template ("about.html")
 
 #Show all Storages
 @app.route('/')
@@ -22,10 +26,12 @@ def newstorage():
 def editstorage():
   return render_template("editstorage.html")
 
+#Delete a Storage
+@app.route('/storage/delete')
+def deletestorage():
+  return render_template("deletestorage.html")
 
-@app.route('/about/')
-def about():
-    return render_template ("about.html")
+
 
 if __name__=="__main__":
     app.run(debug=True)
