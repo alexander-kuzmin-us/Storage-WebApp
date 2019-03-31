@@ -1,7 +1,17 @@
 {%extends "layout.html"%}
 {%block content%}
-<div class="deletecontaineritem">
-    <h1>Delete Item in the Container</h1>
-    <p>Feel free to delete an item(s) in the container</p>
-  </div>
-{%endblock%}
+{% include "header.html" %}
+<h2> Are you sure you want to delete {{item.name}}? </h2>
+
+<form action="#" method = 'post'>
+
+	<button type="submit" class="btn btn-default delete" id="submit" type="submit">
+	<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</button>
+	<a href = '{{url_for('showStorages')}}'>
+		<button class="btn btn-default delete">
+		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
+	</a>
+
+</form>
+
+{% endblock %}
