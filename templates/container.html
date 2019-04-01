@@ -42,27 +42,23 @@
 					<span class="glyphicon glyphicon-glass" aria-hidden="true"></span>Add Container Item
 				</button>
 			</a>
-						<a href="{{url_for('deleteStorage', storage_id = storage.id )}}">
-				<button class="btn btn-default delete" id="delete-storage">
-					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete Storage
-				</button>
-			</a>
-		</div>
-		<div class="col-md-7"></div>
+					<a href="{{url_for('deleteStorage', storage_id = storage.id )}}">
+			<button class="btn btn-default delete" id="delete-storage">
+				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete Storage
+			</button>
+		</a>
 	</div>
+	<div class="col-md-7"></div>
 
-	{% if items !=[] %}
-		<div class="row">
-			<div class="col-md-1"></div>
-			<div class="col-md-3">
-				<h2>Item</h2>
-					{% for i in items %}
-						{% if i.course == 'Item' %}
-							<div class="container-item">
-								<h3>{{i.name}}</h3>
-								<p>{{i.description}}</p>
-								<a href='{{url_for('editContainerItem', storage_id = storage.id, container_id=i.id ) }}'>Edit</a> |
-								<a href='{{url_for('deleteContainerItem', storage_id = storage.id, container_id=i.id ) }}'>Delete</a>
-							</div>
-						{% endif %}
+	{% for Item in Container %}
+		<a href = "{{url_for('showContainer', storage_id = storage.id)}}">
+			<div class="row">
+				<div class="col-md-1"></div>
+					<div class="col-md-10 storage-list">
+						<h3>{{storage.name}}</h3>
+					</div>
+				<div class="col-md-1"></div>
+			</div>
+		</a>
+	{% endfor %}
 {% endblock %}
