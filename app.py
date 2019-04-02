@@ -177,11 +177,6 @@ def storagesJSON():
     return jsonify(storages=[r.serialize for r in strages])
 
 
-@app.route('/about/')
-def about():
-    return render_template('about.html')
-
-
 #Show all Storages
 @app.route('/')
 @app.route('/storage/')

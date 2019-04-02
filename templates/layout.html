@@ -1,29 +1,14 @@
 <!DOCTYPE html>
-<html>
-<heade>
-  <title>PUBLIC STORAGE</title>
-  <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
-</head>
-  <head>
-      <title>PUBLIC STORAGE</title>
-      <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
-  </head>
-  <body>
-    <header>
-      <div class="container">
-        <h1 class="logo">Public Storage</h1>
-        <strong><nav>
-          <ul class="menu">
-            <li><a href="{{ url_for('showStorages') }}">Storages</a></li>
-            <li><a href="{{ url_for('about') }}">About</a></li>
-            <li><a href="{{ url_for('login') }}">Login</a></li>
-          </ul>
-        </nav></strong>
-      </div>
-    </header>
-    <div class="container">
-        {%block content%}
-        {%endblock%}
-    </div>
-  </body>
+<html lang="en">
+	<head>
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='main.css') }}">
+	</head>
+	<body>
+		<div class="container">
+			{% block content %}
+			{% endblock %}
+		</div>
+	</body>
 </html>
