@@ -1,7 +1,7 @@
-{%extends "layout.html"%}
-{%block content%}
+{% extends "main.html" %}
+{% block content %}
 {% include "header.html" %}
-	<div class="row top-menu">
+	<div class="row top-container">
 		<div class="col-md-10"></div>
 		<div class="col-md-2 text-right">
 					</div>
@@ -12,7 +12,7 @@
 	<div class="row banner main">
 		<div class="col-md-1"></div>
 		<div class="col-md-11 padding-none">
-			<h1>Storages</h1>
+			<h2>All Storages</h2>
 		</div>
 	</div>
 
@@ -33,15 +33,15 @@
 	<div class="row padding-top padding-bottom">
 		<div class="col-md-1"></div>
 		<div class="col-md-10 padding-none">
-			<a href="{{url_for('newStorage')}}">
-				<button class="btn btn-default" id="new-storage">Add Storage
+			<a href="{{url_for('NewStorage')}}">
+				<button class="btn btn-default" id="new-storage">Add storage
 				</button>
 			</a>
 		</div>
 		<div class="col-md-1"></div>
 	</div>
-		{% for storage in storages %}
-		<a href = "{{url_for('showContainer', storage_id = storage.id)}}">
+	{% for storage in storages %}
+		<a href = "{{url_for('ShowContainer', storage_id = storage.id)}}">
 			<div class="row">
 				<div class="col-md-1"></div>
 					<div class="col-md-10 storage-list">
@@ -50,5 +50,5 @@
 				<div class="col-md-1"></div>
 			</div>
 		</a>
-		{% endfor %}
+	{% endfor %}
 {% endblock %}
