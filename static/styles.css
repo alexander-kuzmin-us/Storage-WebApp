@@ -25,7 +25,7 @@ h3 {
  p {
  	font-family: "Helvetica Neue", Roboto, Helvetica, Arial, sans-serif;
  	font-size: 16px;
- 	color: #7B7573;
+ 	color: #757271;
  	line-height: 24px;
  	font-weight: 400;
  }
@@ -61,7 +61,7 @@ h3 {
 	color: #42C3C9;;
 }
 .btn:hover {
-	border-color: #9FB80A;
+	border-color: #7ca0a8;
 }
 .btn.delete {
 	border-color: #aaaaaa;
@@ -93,10 +93,10 @@ h3 {
 	height: 15px;
 }
 .divider.blue {
-	background-color: #42C3C9;
+	background-color: #5c8a8a;
 }
 .divider.green {
-	background-color: #9FB80A;
+	background-color: #668299;
 }
 .banner.main {
 	height: 150px;
