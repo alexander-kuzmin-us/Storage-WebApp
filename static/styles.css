@@ -6,14 +6,14 @@
 h1 {
 	font-family: "Helvetica Neue Light", Roboto, Helvetica, Arial, sans-serif;
 	font-size: 50px;
-	color: #51453B;
+	color: #213d3c;
 	line-height: 60px;
 	font-weight: 300;
 }
 
 h2 {
 	font-size: 24px;
-	color: #42C3C9;
+	color: #636b6a;
 	line-height: 29px;
 }
 
@@ -25,7 +25,7 @@ h3 {
  p {
  	font-family: "Helvetica Neue", Roboto, Helvetica, Arial, sans-serif;
  	font-size: 16px;
- 	color: #757271;
+ 	color: #7B7573;
  	line-height: 24px;
  	font-weight: 400;
  }
@@ -37,7 +37,7 @@ h3 {
  }
 
  a {
- 	font-size: 16px;
+ 	font-size: 14px;
  	color: #0093B9;
  	line-height: 17px;
  }
@@ -56,12 +56,12 @@ h3 {
 .btn {
 	padding: 20px;
 	margin: 0;
-	border-color: #42C3C9;
+	border-color: #4f7776;
 	border-width: 2px;
-	color: #42C3C9;;
+	color: #4f7776;;
 }
 .btn:hover {
-	border-color: #7ca0a8;
+	border-color: #4f7776;
 }
 .btn.delete {
 	border-color: #aaaaaa;
@@ -93,10 +93,10 @@ h3 {
 	height: 15px;
 }
 .divider.blue {
-	background-color: #5c8a8a;
+	background-color: #4f7776;
 }
 .divider.green {
-	background-color: #668299;
+	background-color: ##4f7776;
 }
 .banner.main {
 	height: 150px;
@@ -107,7 +107,7 @@ h3 {
 }
 .banner.container {
 	height: 150px;
-	background-color: #E1E17F;
+	background-color: #dae5e5;
 }
 .banner.profile {
 	height: 150px;
@@ -116,12 +116,12 @@ h3 {
 .banner h1 {
 	margin: 45px 0;
 }
- .storage-list {
+ .autorepaircenter-list {
  	background-color: #F0F0F0;
  	padding: 20px;
 u }
- .storage-list:hover {
- 	background-color: #e1e17f;
+ .autorepaircenter-list:hover {
+ 	background-color: #F0F0F0;
  	padding: 20px;
 }
 .container-item {
@@ -129,6 +129,9 @@ u }
 	padding: 20px;
 	margin: 20px;
 	margin-left: -20px;
+}
+.container-price {
+	font-weight: 700;
 }
 .creator {
 	padding-right: 20px;

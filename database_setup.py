@@ -5,8 +5,8 @@ from sqlalchemy import create_engine
 
 Base = declarative_base()
 
-class Storage(Base):
-    __tablename__ = 'storage'
+class AutoRepairCenter(Base):
+    __tablename__ = 'autorepaircenter'
 
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
@@ -23,11 +23,13 @@ class ContainerItem(Base):
     __tablename__ = 'container_item'
 
 
-    name =Column(String(80), nullable = False)
+    name = Column(String(80), nullable = False)
     id = Column(Integer, primary_key = True)
     description = Column(String(250))
-    storage_id = Column(Integer,ForeignKey('storage.id'))
-    storage = relationship(Storage)
+    price = Column(String(8))
+    type = Column(String(250))
+    autorepaircenter_id = Column(Integer,ForeignKey('autorepaircenter.id'))
+    autorepaircenter = relationship(AutoRepairCenter)
 
 
     @property
@@ -37,11 +39,13 @@ class ContainerItem(Base):
            'name'         : self.name,
            'description'         : self.description,
            'id'         : self.id,
+           'price'         : self.price,
+           'type'         : self.type,
        }
 
 
 
-engine = create_engine('sqlite:///storage.db')
+engine = create_engine('sqlite:///autorepaircenter.db')
 
 
 Base.metadata.create_all(engine)

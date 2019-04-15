@@ -1,4 +1,4 @@
-{% extends "main.html" %}
+{% extends "layout.html" %}
 {% block content %}
 {% include "header.html" %}
 <h2> Are you sure you want to delete {{item.name}}? </h2>
@@ -7,7 +7,7 @@
 
 	<button type="submit" class="btn btn-default delete" id="submit" type="submit">
 	<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</button>
-	<a href = '{{url_for('ShowStorages')}}'>
+	<a href = '{{url_for('showAutoRepairCenters')}}'>
 		<button class="btn btn-default delete">
 		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
 	</a>
