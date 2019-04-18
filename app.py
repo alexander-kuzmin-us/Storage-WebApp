@@ -180,11 +180,17 @@ def AutoRepairCentercentersJSON():
 @app.route('/autorepaircenter/')
 def showAutoRepairCenters():
     autorepaircenters = session.query(AutoRepairCenter).order_by(asc(AutoRepairCenter.name))
-    return render_template('autorepaircenters.html', autorepaircenters = autorepaircenters)
+    if 'username' not in login_session:
+        return render_template('publicautorepaircenters.html', autorepaircenters=autorepaircenters)
+    else:
+        return render_template('autorepaircenters.html', autorepaircenters=autorepaircenters)
+
 
 #Create a new Autorepair centercenter
 @app.route('/autorepaircenter/new/', methods=['GET','POST'])
 def newAutoRepairCenter():
+    if 'username' not in login_session:
+        return redirect('/login')
     if request.method == 'POST':
       newAutoRepairCenter = AutoRepairCenter(name = request.form['name'])
       session.add(newAutoRepairCenter)
@@ -198,6 +204,10 @@ def newAutoRepairCenter():
 @app.route('/autorepaircenter/<int:autorepaircenter_id>/edit/', methods = ['GET', 'POST'])
 def editAutoRepairCenter(autorepaircenter_id):
     editedAutoRepairCenter = session.query(AutoRepairCenter).filter_by(id = autorepaircenter_id).one()
+    if 'username' not in login_session:
+        return redirect('/login')
+    if editedAutoRepairCenter.user_id != login_session['user_id']:
+        return "<script>function myFunction() {alert('You are not authorized to edit this autorepaircenter. Please create your own autorepaircenter in order to edit.');}</script><body onload='myFunction()''>"
     if request.method == 'POST':
       if request.form['name']:
         editedAutoRepairCenter.name = request.form['name']
@@ -211,6 +221,10 @@ def editAutoRepairCenter(autorepaircenter_id):
 @app.route('/autorepaircenter/<int:autorepaircenter_id>/delete/', methods = ['GET','POST'])
 def deleteAutoRepairCenter(autorepaircenter_id):
   autorepaircenterToDelete = session.query(AutoRepairCenter).filter_by(id = autorepaircenter_id).one()
+  if 'username' not in login_session:
+      return redirect('/login')
+      if autorepaircenterToDelete.user_id != login_session['user_id']:
+          return "<script>function myFunction() {alert('You are not authorized to delete this autorepaircenter. Please create your own autorepaircenter in order to delete.');}</script><body onload='myFunction()''>"
   if request.method == 'POST':
       session.delete(autorepaircenterToDelete)
       flash('%s Successfully Deleted' % autorepaircenterToDelete.name)
@@ -224,59 +238,74 @@ def deleteAutoRepairCenter(autorepaircenter_id):
 @app.route('/autorepaircenter/<int:autorepaircenter_id>/container/')
 def showContainer(autorepaircenter_id):
     autorepaircenter = session.query(AutoRepairCenter).filter_by(id = autorepaircenter_id).one()
+    creator = getUserInfo(autorepaircenter.user_id)
     items = session.query(ContainerItem).filter_by(autorepaircenter_id = autorepaircenter_id).all()
-    return render_template('container.html', items = items, autorepaircenter = autorepaircenter)
-
+    if 'username' not in login_session or creator.id != login_session['user_id']:
+        return render_template('publiccontainer.html', items=items, autorepaircenter=autorepaircenter, creator=creator)
+    else:
+        return render_template('container.html', items = items, autorepaircenter = autorepaircenter)
 
 
 #Create a new container Item
 @app.route('/autorepaircenter/<int:autorepaircenter_id>/container/new/',methods=['GET','POST'])
 def newContainerItem(autorepaircenter_id):
-  autorepaircenter = session.query(AutoRepairCenter).filter_by(id = autorepaircenter_id).one()
-  if request.method == 'POST':
-      newItem = ContainerItem(name = request.form['name'], description = request.form['description'], price = request.form['price'], type = request.form['type'], autorepaircenter_id = autorepaircenter_id)
-      session.add(newItem)
-      session.commit()
-      flash('New Container %s Item Successfully Created' % (newItem.name))
-      return redirect(url_for('showContainer', autorepaircenter_id = autorepaircenter_id))
-  else:
-      return render_template('newcontaineritem.html', autorepaircenter_id = autorepaircenter_id)
+    if 'username' not in login_session:
+        return redirect('/login')
+        autorepaircenter = session.query(AutoRepairCenter).filter_by(id = autorepaircenter_id).one()
+        if login_session['user_id'] != autorepaircenter.user_id:
+            return "<script>function myFunction() {alert('You are not authorized to add container items to this Autocenter. Please create your own Autocenter in order to add items.');}</script><body onload='myFunction()''>"
+            if request.method == 'POST':
+                newItem = ContainerItem(name = request.form['name'], description = request.form['description'], price = request.form['price'], type = request.form['type'], autorepaircenter_id = autorepaircenter_id)
+                session.add(newItem)
+                session.commit()
+                flash('New Container %s Item Successfully Created' % (newItem.name))
+                return redirect(url_for('showContainer', autorepaircenter_id = autorepaircenter_id))
+            else:
+                return render_template('newcontaineritem.html', autorepaircenter_id = autorepaircenter_id)
+
 
 #Edit a container Item
 @app.route('/autorepaircenter/<int:autorepaircenter_id>/container/<int:container_id>/edit', methods=['GET','POST'])
 def editContainerItem(autorepaircenter_id, container_id):
-
-    editedItem = session.query(ContainerItem).filter_by(id = container_id).one()
-    autorepaircenter = session.query(AutoRepairCenter).filter_by(id = autorepaircenter_id).one()
-    if request.method == 'POST':
-        if request.form['name']:
-            editedItem.name = request.form['name']
-        if request.form['description']:
-            editedItem.description = request.form['description']
-        if request.form['price']:
-            editedItem.price = request.form['price']
-        if request.form['type']:
-            editedItem.type = request.form['type']
-        session.add(editedItem)
-        session.commit()
-        flash('Container Item Successfully Edited')
-        return redirect(url_for('showContainer', autorepaircenter_id = autorepaircenter_id))
-    else:
-        return render_template('editcontaineritem.html', autorepaircenter_id = autorepaircenter_id, container_id = container_id, item = editedItem)
+    if 'username' not in login_session:
+        return redirect('/login')
+        editedItem = session.query(ContainerItem).filter_by(id = container_id).one()
+        autorepaircenter = session.query(AutoRepairCenter).filter_by(id = autorepaircenter_id).one()
+        if login_session['user_id'] != autorepaircenter.user_id:
+            return "<script>function myFunction() {alert('You are not authorized to edit Container items to this Autocenter. Please create your own Autocenter in order to edit items.');}</script><body onload='myFunction()''>"
+            if request.method == 'POST':
+                if request.form['name']:
+                    editedItem.name = request.form['name']
+                    if request.form['description']:
+                        editedItem.description = request.form['description']
+                        if request.form['price']:
+                            editedItem.price = request.form['price']
+                            if request.form['type']:
+                                editedItem.type = request.form['type']
+                                session.add(editedItem)
+                                session.commit()
+                                flash('Container Item Successfully Edited')
+                                return redirect(url_for('showContainer', autorepaircenter_id = autorepaircenter_id))
+                            else:
+                                return render_template('editcontaineritem.html', autorepaircenter_id = autorepaircenter_id, container_id = container_id, item = editedItem)
 
 
 #Delete a container Item
 @app.route('/autorepaircenter/<int:autorepaircenter_id>/container/<int:container_id>/delete', methods = ['GET','POST'])
 def deleteContainerItem(autorepaircenter_id,container_id):
-    autorepaircenter = session.query(AutoRepairCenter).filter_by(id = autorepaircenter_id).one()
-    itemToDelete = session.query(ContainerItem).filter_by(id = container_id).one()
-    if request.method == 'POST':
-        session.delete(itemToDelete)
-        session.commit()
-        flash('Container Item Successfully Deleted')
-        return redirect(url_for('showContainer', autorepaircenter_id = autorepaircenter_id))
-    else:
-        return render_template('deletecontaineritem.html', item = itemToDelete)
+     if 'username' not in login_session:
+        return redirect('/login')
+        autorepaircenter = session.query(AutoRepairCenter).filter_by(id = autorepaircenter_id).one()
+        itemToDelete = session.query(ContainerItem).filter_by(id = container_id).one()
+        if login_session['user_id'] != autorepaircenter.user_id:
+            return "<script>function myFunction() {alert('You are not authorized to delete Container items to this Autocenter. Please create your own Autocenter in order to delete items.');}</script><body onload='myFunction()''>"
+            if request.method == 'POST':
+                session.delete(itemToDelete)
+                session.commit()
+                flash('Container Item Successfully Deleted')
+                return redirect(url_for('showContainer', autorepaircenter_id = autorepaircenter_id))
+            else:
+                return render_template('deletecontaineritem.html', item = itemToDelete)
 
 
 
@@ -284,4 +313,4 @@ def deleteContainerItem(autorepaircenter_id,container_id):
 if __name__ == '__main__':
   app.secret_key = 'super_secret_key'
   app.debug = True
-  app.run(host = '0.0.0.0', port = 5000)
+  app.run(host = 'localhost', port = 5000)
