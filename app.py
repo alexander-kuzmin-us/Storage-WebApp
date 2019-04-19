@@ -210,7 +210,7 @@ def AutoRepairCentercentersJSON():
 def showAutoRepairCenters():
     autorepaircenters = session.query(AutoRepairCenter).order_by(asc(AutoRepairCenter.name))
     if 'username' not in login_session:
-        return render_template('publicautorepaircenters.html', autorepaircenters=autorepaircenters, creator=creator)
+        return render_template('publicautorepaircenters.html', autorepaircenters=autorepaircenters)
     else:
         return render_template('autorepaircenters.html', autorepaircenters=autorepaircenters)
 
@@ -274,7 +274,7 @@ def showContainer(autorepaircenter_id):
     if 'username' not in login_session or creator.id != login_session['user_id']:
         return render_template('publiccontainer.html', items=items, autorepaircenter=autorepaircenter, creator=creator)
     else:
-        return render_template('container.html', items = items, autorepaircenter = autorepaircenter)
+        return render_template('container.html', items = items, autorepaircenter = autorepaircenter, creator=creator)
 
 
 #Create a new container Item
