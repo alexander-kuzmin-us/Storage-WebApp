@@ -226,8 +226,8 @@ def newAutoRepairCenter():
         flash('New Auto Repair Center %s Successfully Created' % newAutoRepairCenter.name)
         session.commit()
         return redirect(url_for('showAutoRepairCenters'))
-        else:
-            return render_template('newautorepaircenter.html')
+    else:
+        return render_template('newautorepaircenter.html')
 
 
 #Edit a Autorepair centercenter
@@ -260,8 +260,8 @@ def deleteAutoRepairCenter(autorepaircenter_id):
                 flash('%s Successfully Deleted' % autorepaircenterToDelete.name)
                 session.commit()
                 return redirect(url_for('showAutoRepairCenters', autorepaircenter_id = autorepaircenter_id))
-                else:
-                    return render_template('deleteautorepaircenter.html',autorepaircenter = autorepaircenterToDelete)
+            else:
+                return render_template('deleteautorepaircenter.html',autorepaircenter = autorepaircenterToDelete)
 
 
 #Show a Autorepair centercenter container
