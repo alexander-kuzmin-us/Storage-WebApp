@@ -58,7 +58,6 @@ class ContainerItem(Base):
        }
 
 
-
 engine = create_engine('sqlite:///autorepaircenter.db')
 
 
