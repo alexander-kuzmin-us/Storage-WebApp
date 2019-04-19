@@ -240,11 +240,11 @@ def editAutoRepairCenter(autorepaircenter_id):
         return "<script>function myFunction() {alert('You are not authorized to edit this autorepaircenter. Please create your own autorepaircenter in order to edit.');}</script><body onload='myFunction()''>"
     if request.method == 'POST':
         if request.form['name']:
-        editedAutoRepairCenter.name = request.form['name']
-        flash('AutoRepairCenter Successfully Edited %s' % editedAutoRepairCenter.name)
-        return redirect(url_for('showAutoRepairCenters'))
-    else:
-        return render_template('editautorepaircenter.html', autorepaircenter = editedAutoRepairCenter)
+            editedAutoRepairCenter.name = request.form['name']
+            flash('AutoRepairCenter Successfully Edited %s' % editedAutoRepairCenter.name)
+            return redirect(url_for('showAutoRepairCenters'))
+        else:
+            return render_template('editautorepaircenter.html', autorepaircenter = editedAutoRepairCenter)
 
 
 #Delete a Autorepair centercenter
