@@ -58,7 +58,7 @@ class ContainerItem(Base):
        }
 
 
-engine = create_engine('sqlite:///autorepaircenter.db')
+engine = create_engine('sqlite:///autorepaircenter.db', connect_args={'check_same_thread': False}, echo=True)
 
 
 Base.metadata.create_all(engine)
