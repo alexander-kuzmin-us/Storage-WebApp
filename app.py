@@ -210,7 +210,7 @@ def AutoRepairCentercentersJSON():
 def showAutoRepairCenters():
     autorepaircenters = session.query(AutoRepairCenter).order_by(asc(AutoRepairCenter.name))
     if 'username' not in login_session:
-        return render_template('publicautorepaircenters.html', autorepaircenters=autorepaircenters)
+        return render_template('publicautorepaircenters.html', autorepaircenters=autorepaircenters, creator=creator)
     else:
         return render_template('autorepaircenters.html', autorepaircenters=autorepaircenters)
 
