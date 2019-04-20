@@ -55,6 +55,8 @@ class ContainerItem(Base):
            'id'         : self.id,
            'price'         : self.price,
            'type'         : self.type,
+           'autorepaircenter_id'    : self.autorepaircenter_id,
+           'user_id'    :   self.user_id,
        }
 
 

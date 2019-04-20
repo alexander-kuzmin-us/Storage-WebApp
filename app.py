@@ -1,4 +1,10 @@
-from flask import Flask, render_template, request, redirect, jsonify, url_for, flash
+from flask import (Flask,
+                   render_template,
+                   request,
+                   redirect,
+                   jsonify,
+                   url_for,
+                   flash)
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, AutoRepairCenter, ContainerItem, User
@@ -108,7 +114,7 @@ def gconnect():
 
     data = answer.json()
 
-    login_session['username'] = data['name']
+    login_session['username'] = data.get('name', '')
     login_session['picture'] = data['picture']
     login_session['email'] = data['email']
 
@@ -175,6 +181,7 @@ def gdisconnect():
         del login_session['username']
         del login_session['email']
         del login_session['picture']
+        del login_session['user_id']
         response = make_response(json.dumps('Successfully disconnected.'), 200)
         response.headers['Content-Type'] = 'application/json'
         return response
@@ -212,7 +219,7 @@ def showAutoRepairCenters():
     if 'username' not in login_session:
         return render_template('publicautorepaircenters.html', autorepaircenters=autorepaircenters, creator=creator)
     else:
-        return render_template('autorepaircenters.html', autorepaircenters=autorepaircenters)
+        return render_template('autorepaircenters.html', autorepaircenters=autorepaircenters, creator=creator)
 
 
 #Create a new Autorepair centercenter
@@ -228,6 +235,7 @@ def newAutoRepairCenter():
         return redirect(url_for('showAutoRepairCenters'))
     else:
         return render_template('newautorepaircenter.html')
+        session.close()
 
 
 #Edit a Autorepair centercenter
@@ -262,6 +270,7 @@ def deleteAutoRepairCenter(autorepaircenter_id):
                 return redirect(url_for('showAutoRepairCenters', autorepaircenter_id = autorepaircenter_id))
             else:
                 return render_template('deleteautorepaircenter.html',autorepaircenter = autorepaircenterToDelete)
+                session.close()
 
 
 #Show a Autorepair centercenter container
@@ -293,6 +302,7 @@ def newContainerItem(autorepaircenter_id):
                 return redirect(url_for('showContainer', autorepaircenter_id = autorepaircenter_id))
             else:
                 return render_template('newcontaineritem.html', autorepaircenter_id = autorepaircenter_id)
+                session.close()
 
 
 #Edit a container Item
@@ -319,6 +329,7 @@ def editContainerItem(autorepaircenter_id, container_id):
                                 return redirect(url_for('showContainer', autorepaircenter_id = autorepaircenter_id))
                             else:
                                 return render_template('editcontaineritem.html', autorepaircenter_id = autorepaircenter_id, container_id = container_id, item = editedItem)
+                                session.close()
 
 
 #Delete a container Item
@@ -337,6 +348,7 @@ def deleteContainerItem(autorepaircenter_id,container_id):
                 return redirect(url_for('showContainer', autorepaircenter_id = autorepaircenter_id))
             else:
                 return render_template('deletecontaineritem.html', item = itemToDelete)
+                session.close()
 
 
 if __name__ == '__main__':
