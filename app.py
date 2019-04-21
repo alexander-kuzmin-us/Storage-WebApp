@@ -183,7 +183,8 @@ def gdisconnect():
     print 'In gdisconnect access token is %s', access_token
     print 'User name is: '
     print login_session['username']
-    url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % login_session['access_token']
+    url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' \
+            % login_session['access_token']
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
     print 'result is '
@@ -208,20 +209,21 @@ def gdisconnect():
 # JSON APIs to view AutoRepairCenter Information
 @app.route('/autorepaircenter/<int:autorepaircenter_id>/container/JSON')
 def AutorepairCentercenterContainerJSON(autorepaircenter_id):
-    autorepaircenter = session\
-            .query(AutoRepairCenter)\
+    autorepaircenter = session \
+            .query(AutoRepairCenter) \
             .filter_by(id=autorepaircenter_id).one()
-    items = session\
-        .query(ContainerItem)\
+    items = session \
+        .query(ContainerItem) \
         .filter_by(autorepaircenter_id=autorepaircenter_id).all()
     return jsonify(ContainerItems=[i.serialize for i in items])
 
 
 @app.route(
-    '/autorepaircenter/<int:autorepaircenter_id>/container/<int:container_id>/JSON')
+    '/autorepaircenter/<int:autorepaircenter_id>/\
+                container/<int:container_id>/JSON')
 def ContainerItemJSON(autorepaircenter_id, container_id):
-    Container_Item = session\
-            .query(ContainerItem)\
+    Container_Item = session \
+            .query(ContainerItem) \
             .filter_by(id=container_id).one()
     return jsonify(Container_Item=Container_Item.serialize)
 
@@ -236,11 +238,11 @@ def AutoRepairCentercentersJSON():
 @app.route('/')
 @app.route('/autorepaircenter/')
 def showAutoRepairCenters():
-    autorepaircenters = session\
+    autorepaircenters = session \
             .query(AutoRepairCenter).order_by(asc(AutoRepairCenter.name))
     if 'username' not in login_session:
         return render_template(
-            'publicautorepaircenters.html', autorepaircenters=autorepaircenters)
+        'publicautorepaircenters.html', autorepaircenters=autorepaircenters)
     else:
         return render_template(
             'autorepaircenters.html', autorepaircenters=autorepaircenters)
@@ -268,14 +270,18 @@ def newAutoRepairCenter():
 
 # Edit a Autorepair centercenter
 @app.route(
-    '/autorepaircenter/<int:autorepaircenter_id>/edit/', methods=['GET', 'POST'])
+    '/autorepaircenter/<int:autorepaircenter_id>/edit/',
+    methods=['GET', 'POST'])
 def editAutoRepairCenter(autorepaircenter_id):
     editedAutoRepairCenter = session.query(
         AutoRepairCenter).filter_by(id=autorepaircenter_id).one()
     if 'username' not in login_session:
         return redirect('/login')
     if editedAutoRepairCenter.user_id != login_session['user_id']:
-        return "<script>function myFunction() {alert('You are not authorized to edit this autorepaircenter. Please create your own autorepaircenter in order to edit.');}</script><body onload='myFunction()''>"
+        return "<script>function myFunction() \
+        {alert('You are not authorized to edit this autorepaircenter. \
+        Please create your own autorepaircenter in order to edit.' \
+        );}</script><body onload='myFunction()''>"
     if request.method == 'POST':
         if request.form['name']:
             editedAutoRepairCenter.name = request.form['name']
@@ -303,7 +309,10 @@ def deleteAutoRepairCenter(autorepaircenter_id):
     autorepaircenterToDelete = session.query(
         AutoRepairCenter).filter_by(id=autorepaircenter_id).one()
     if autorepaircenterToDelete.user_id != login_session['user_id']:
-        return "<script>function myFunction() {alert('You are not authorized to delete this autorepaircenter. Please create your own autorepaircenter in order to delete.');}</script><body onload='myFunction()''>"
+        return "<script>function myFunction() {alert( \
+        'You are not authorized to delete this autorepaircenter. \
+        Please create your own autorepaircenter in order to delete.' \
+        );}</script><body onload='myFunction()''>"
     if request.method == 'POST':
         session.delete(autorepaircenterToDelete)
         flash('%s Successfully Deleted' % autorepaircenterToDelete.name)
@@ -338,14 +347,18 @@ def showContainer(autorepaircenter_id):
 
 # Create a new container Item
 @app.route(
-    '/autorepaircenter/<int:autorepaircenter_id>/container/new/', methods=['GET', 'POST'])
+    '/autorepaircenter/<int:autorepaircenter_id>/container/new/',
+    methods=['GET', 'POST'])
 def newContainerItem(autorepaircenter_id):
     if 'username' not in login_session:
         return redirect('/login')
     autorepaircenter = session.query(
         AutoRepairCenter).filter_by(id=autorepaircenter_id).one()
     if login_session['user_id'] != autorepaircenter.user_id:
-        return "<script>function myFunction() {alert('You are not authorized to add container items to this Autocenter. Please create your own Autocenter in order to add items.');}</script><body onload='myFunction()''>"
+        return "<script>function myFunction() {alert( \
+        'You are not authorized to add container items to this Autocenter. \
+        Please create your own Autocenter in order to add items.' \
+        );}</script><body onload='myFunction()''>"
     if request.method == 'POST':
         newItem = ContainerItem(
             name=request.form['name'], description=request.form['description'],
@@ -363,7 +376,10 @@ def newContainerItem(autorepaircenter_id):
 
 
 # Edit a container Item
-@app.route('/autorepaircenter/<int:autorepaircenter_id>/container/<int:container_id>/edit', methods=['GET', 'POST'])
+@app.route(
+    '/autorepaircenter/<int:autorepaircenter_id>/container/\
+    <int:container_id>/edit',
+    methods=['GET', 'POST'])
 def editContainerItem(autorepaircenter_id, container_id):
     if 'username' not in login_session:
         return redirect('/login')
@@ -371,7 +387,11 @@ def editContainerItem(autorepaircenter_id, container_id):
     autorepaircenter = session.query(
         AutoRepairCenter).filter_by(id=autorepaircenter_id).one()
     if login_session['user_id'] != autorepaircenter.user_id:
-        return "<script>function myFunction() {alert('You are not authorized to edit Container items to this Autocenter. Please create your own Autocenter in order to edit items.');}</script><body onload='myFunction()''>"
+        return "<script>function myFunction() \
+        {alert('You are not authorized to edit Container items \
+        to this Autocenter. Please create your own \
+        Autocenter in order to edit items.' \
+        );}</script><body onload='myFunction()''>"
     if request.method == 'POST':
         if request.form['name']:
             editedItem.name = request.form['name']
@@ -395,15 +415,22 @@ def editContainerItem(autorepaircenter_id, container_id):
 
 # Delete a container Item
 @app.route(
-    '/autorepaircenter/<int:autorepaircenter_id>/container/<int:container_id>/delete', methods=['GET', 'POST'])
+    '/autorepaircenter/<int:autorepaircenter_id>/container/\
+    <int:container_id>/delete',
+    methods=['GET', 'POST'])
 def deleteContainerItem(autorepaircenter_id, container_id):
     if 'username' not in login_session:
         return redirect('/login')
     autorepaircenter = session.query(
         AutoRepairCenter).filter_by(id=autorepaircenter_id).one()
-    itemToDelete = session.query(ContainerItem).filter_by(id=container_id).one()
+    itemToDelete = session.query(
+        ContainerItem
+        ).filter_by(id=container_id).one()
     if login_session['user_id'] != autorepaircenter.user_id:
-        return "<script>function myFunction() {alert('You are not authorized to delete Container items to this Autocenter. Please create your own Autocenter in order to delete items.');}</script><body onload='myFunction()''>"
+        return "<script>function myFunction() {alert('You are not authorized \
+        to delete Container items to this Autocenter. Please create your \
+        own Autocenter in order to delete items.' \
+        );}</script><body onload='myFunction()''>"
     if request.method == 'POST':
         session.delete(itemToDelete)
         session.commit()
