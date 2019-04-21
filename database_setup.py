@@ -22,7 +22,8 @@ class AutoRepairCenter(Base):
     name = Column(String(250), nullable=False)
     user_id=Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
-
+    container_item = relationship('ContainerItem', cascade='all, delete-orphan')
+    
     @property
     def serialize(self):
        """Return object data in easily serializeable format"""
