@@ -29,17 +29,17 @@
 <div class="row padding-top padding-bottom">
    <div class="col-md-1"></div>
    <div class="col-md-11 padding-none">
-      <a href="{{url_for('editAutoRepairCenter', autorepaircenter_id = autorepaircenter.id )}}">
+      <a href="{{url_for('editAutoRepairCenter', autorepaircenter_id=autorepaircenter.id )}}">
       <button class="btn btn-default" id="new-container-item">
       <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Edit Auto Repair Center
       </button>
       </a>
-      <a href="{{url_for('newContainerItem', autorepaircenter_id = autorepaircenter.id )}}">
+      <a href="{{url_for('newContainerItem', autorepaircenter_id=autorepaircenter.id )}}">
       <button class="btn btn-default" id="new-container-item">
       <span class="glyphicon glyphicon-glass" aria-hidden="true"></span>Add Container Item
       </button>
       </a>
-      <a href="{{url_for('deleteAutoRepairCenter', autorepaircenter_id = autorepaircenter.id )}}">
+      <a href="{{url_for('deleteAutoRepairCenter', autorepaircenter_id=autorepaircenter.id )}}">
       <button class="btn btn-default delete" id="delete-autorepaircenter">
       <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete Auto Repair Center
       </button>
@@ -58,8 +58,8 @@
          <h3>{{i.name}}</h3>
          <p>{{i.description}}</p>
          <p class="container-price">{{i.price}}</p>
-         <a href='{{url_for('editContainerItem', autorepaircenter_id = autorepaircenter.id, container_id=i.id ) }}'>Edit</a> |
-         <a href='{{url_for('deleteContainerItem', autorepaircenter_id = autorepaircenter.id, container_id=i.id ) }}'>Delete</a>
+         <a href='{{url_for('editContainerItem', autorepaircenter_id=autorepaircenter.id, container_id=i.id ) }}'>Edit</a> |
+         <a href='{{url_for('deleteContainerItem', autorepaircenter_id=autorepaircenter.id, container_id=i.id ) }}'>Delete</a>
       </div>
       {% endif %}
       {% endfor %}
@@ -72,8 +72,8 @@
          <h3>{{i.name}}</h3>
          <p>{{i.description}}</p>
          <p class="container-price">{{i.price}}</p>
-         <a href='{{url_for('editContainerItem', autorepaircenter_id = autorepaircenter.id, container_id=i.id ) }}'>Edit</a> |
-         <a href='{{url_for('deleteContainerItem', autorepaircenter_id = autorepaircenter.id, container_id=i.id ) }}'>Delete</a>
+         <a href='{{url_for('editContainerItem', autorepaircenter_id=autorepaircenter.id, container_id=i.id ) }}'>Edit</a> |
+         <a href='{{url_for('deleteContainerItem', autorepaircenter_id=autorepaircenter.id, container_id=i.id ) }}'>Delete</a>
       </div>
       {% endif %}
       {% endfor %}
@@ -86,8 +86,8 @@
          <h3>{{i.name}}</h3>
          <p>{{i.description}}</p>
          <p class="container-price">{{i.price}}</p>
-         <a href='{{url_for('editContainerItem', autorepaircenter_id = autorepaircenter.id, container_id=i.id ) }}'>Edit</a> |
-         <a href='{{url_for('deleteContainerItem', autorepaircenter_id = autorepaircenter.id, container_id=i.id ) }}'>Delete</a>
+         <a href='{{url_for('editContainerItem', autorepaircenter_id=autorepaircenter.id, container_id=i.id ) }}'>Edit</a> |
+         <a href='{{url_for('deleteContainerItem', autorepaircenter_id=autorepaircenter.id, container_id=i.id ) }}'>Delete</a>
       </div>
       {% endif %}
       {% endfor %}
@@ -98,8 +98,8 @@
          <h3>{{i.name}}</h3>
          <p>{{i.description}}</p>
          <p class="container-price">{{i.price}}</p>
-         <a href='{{url_for('editContainerItem', autorepaircenter_id = autorepaircenter.id, container_id=i.id ) }}'>Edit</a> |
-         <a href='{{url_for('deleteContainerItem', autorepaircenter_id = autorepaircenter.id, container_id=i.id ) }}'>Delete</a>
+         <a href='{{url_for('editContainerItem', autorepaircenter_id=autorepaircenter.id, container_id=i.id ) }}'>Edit</a> |
+         <a href='{{url_for('deleteContainerItem', autorepaircenter_id=autorepaircenter.id, container_id=i.id ) }}'>Delete</a>
       </div>
       {% endif %}
       {% endfor %}
