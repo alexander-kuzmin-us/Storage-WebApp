@@ -184,7 +184,7 @@ def gdisconnect():
     print 'User name is: '
     print login_session['username']
     url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' \
-            % login_session['access_token']
+        % login_session['access_token']
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
     print 'result is '
@@ -242,7 +242,8 @@ def showAutoRepairCenters():
             .query(AutoRepairCenter).order_by(asc(AutoRepairCenter.name))
     if 'username' not in login_session:
         return render_template(
-        'publicautorepaircenters.html', autorepaircenters=autorepaircenters)
+            'publicautorepaircenters.html',
+            autorepaircenters=autorepaircenters)
     else:
         return render_template(
             'autorepaircenters.html', autorepaircenters=autorepaircenters)
@@ -335,10 +336,13 @@ def showContainer(autorepaircenter_id):
     creator = getUserInfo(autorepaircenter.user_id)
     items = session.query(ContainerItem).filter_by(
         autorepaircenter_id=autorepaircenter_id).all()
-    if 'username' not in login_session or creator.id != login_session['user_id']:
+    if 'username' not in login_session or creator.id != \
+            login_session['user_id']:
         return render_template(
-            'publiccontainer.html', items=items,
-            autorepaircenter=autorepaircenter, creator=creator)
+            'publiccontainer.html',
+            items=items,
+            autorepaircenter=autorepaircenter,
+            creator=creator)
     else:
         return render_template(
             'container.html', items=items, autorepaircenter=autorepaircenter,

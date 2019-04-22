@@ -27,7 +27,7 @@ Download and unzip the files:
 6. Open your browser and go to (http://localhost:5000/)
 
 
-**Expected output:**
+### **Expected output:**
 
 1. You will be able to to register using your Google account
 
@@ -36,4 +36,4 @@ Download and unzip the files:
 3. Create, edit and delete containers items
 
 
-*Aleksandr Kuzmin*
+_**Aleksandr Kuzmin**_
