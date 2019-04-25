@@ -1,8 +1,30 @@
-# **The final Project on  Udacity Full Stack Nanodegree**
+# **The final Project on  Udacity Full Stack Web Developer Nanodegree**
 
-The project is designed as a directory in which registered users can store and edit their notes, divided into categories.
+The project is designed as a data-driven web-based application allows registered by GooglesignIn users create and edit their notes, divided into categories.
 
-This is a thesis work within [Full Stack Web Developer Nanodegree on Udacity](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004)
+This is a main project Full Stack Web Developer Nanodegree on Udacity.
+
+## Software tools and skills used in this project
+
+- HTML
+- Python
+- JavaScript
+- Git
+- GitHub
+- Unix shell
+- Application Programming Interfaces (API)
+- Relational Databases
+- Python Database API
+- SQL
+- PostgreSQL
+- HTTP
+- Transmission Control Protocol (TCP)
+- Servers
+- CRUD
+- Authentication
+- RESTful API
+- Vagrant
+- Asynchronous JavaScript
 
 ## **This in Python written data driven web application consists of several parts:**
 
@@ -34,6 +56,7 @@ Download and unzip the files:
 2. Create a new Autocenter and containers in it
 
 3. Create, edit and delete containers items
+
 
 
 _**Aleksandr Kuzmin**_
