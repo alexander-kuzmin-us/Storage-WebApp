@@ -1,3 +1,6 @@
+#!/usr/bin/env Python 2.7
+
+# Udacity Full Stack Web Developer Nanodegree - Catalog App
 from flask import (Flask,
                    render_template,
                    request,
