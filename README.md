@@ -1,6 +1,7 @@
-# **The final Project on  Udacity Full Stack Web Developer Nanodegree**
+# **Project on  Udacity Full Stack Web Developer Nanodegree**
 
-The project is designed as a data-driven web-based application allows registered by GooglesignIn users create and edit their notes, divided into categories.
+This project was designed as a data-driven web-based application (app).
+App allows registered by GooglesignIn users create and edit and delete their notes, divided into categories.
 
 This is a main project Full Stack Web Developer Nanodegree on Udacity.
 
@@ -26,7 +27,7 @@ This is a main project Full Stack Web Developer Nanodegree on Udacity.
 - Vagrant
 - Asynchronous JavaScript
 
-## **This in Python written data driven web application consists of several parts:**
+## **This is in Python written data driven web application contains of several parts:**
 
 1. app.py Python app with flask and sqlalchemy library
 2. Database, setted up by Python with sqlalchemy
