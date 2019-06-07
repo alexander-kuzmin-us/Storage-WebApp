@@ -27,7 +27,7 @@ This is a main project Full Stack Web Developer Nanodegree on Udacity.
 - Vagrant
 - Asynchronous JavaScript
 
-## **This is in Python written data driven web application contains of several parts:**
+## **This app is in Python written data driven web application contains of several parts:**
 
 1. app.py Python app with flask and sqlalchemy library
 2. Database, setted up by Python with sqlalchemy
