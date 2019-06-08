@@ -1,6 +1,6 @@
 #!/usr/bin/env Python 3
 
-# Udacity Full Stack Web Developer Nanodegree - Catalog App
+# "Catalog App" is a part of Udacity Full Stack Web Developer Nanodegree
 from flask import (Flask,
                    render_template,
                    request,
