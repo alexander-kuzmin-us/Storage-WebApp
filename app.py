@@ -1,6 +1,6 @@
 #!/usr/bin/env Python 3
 
-# "Catalog App" is a part of Udacity Full Stack Web Developer Nanodegree
+# "Auto Repair Center" app is a part of Udacity Full Stack Web Developer Nanodegree
 from flask import (Flask,
                    render_template,
                    request,
