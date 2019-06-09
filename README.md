@@ -3,8 +3,6 @@
 This project was designed as a data-driven web-based application (app).
 App allows registered by Googlesignin users create, edit and delete their notes, divided into categories.
 
-This is a main project Full Stack Web Developer Nanodegree on Udacity.
-
 ## Software tools and skills used in this project
 
 - HTML
