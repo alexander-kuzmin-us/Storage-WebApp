@@ -31,7 +31,7 @@ App allows registered by Googlesignin users create, edit and delete their notes,
 2. Database, setted up by Python with sqlalchemy
 3. Templates and css files supported to easy user communication with the application through the web browser interface
 
-### **How to use:**
+### **How to use**
 
 Download and unzip the files:
 
