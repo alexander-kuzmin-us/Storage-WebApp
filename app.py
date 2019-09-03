@@ -291,11 +291,11 @@ def edit_auto_repair_center(autorepaircenter_id):
             return redirect(url_for('show_auto_repair_centers'))
         else:
             return render_template(
-                'editautorepaircenter.html',
+                'edit_auto_repair_center.html',
                 autorepaircenter=editedAutoRepairCenter)
     else:
         return render_template(
-            'editautorepaircenter.html',
+            'edit_auto_repair_center.html',
             autorepaircenter=editedAutoRepairCenter)
 
 
@@ -321,7 +321,7 @@ def delete_autorepair_center(autorepaircenter_id):
             'show_auto_repair_centers', autorepaircenter_id=autorepaircenter_id))
     else:
         return render_template(
-            'deleteautorepaircenter.html',
+            'delete_autorepair_center.html',
             autorepaircenter=autorepaircenter_to_delete)
         session.close()
 
@@ -374,7 +374,7 @@ def new_container_item(autorepaircenter_id):
             'show_container', autorepaircenter_id=autorepaircenter_id))
     else:
         return render_template(
-            'newcontaineritem.html', autorepaircenter_id=autorepaircenter_id)
+            'new_container_item.html', autorepaircenter_id=autorepaircenter_id)
         session.close()
 
 
