@@ -1,4 +1,4 @@
-#!/usr/bin/env Python 3
+#!/usr/bin/env Python3
 
 # "Auto Repair Center" app is a part of Udacity Full Stack Web Developer Nanodegree
 from flask import (Flask,
@@ -43,8 +43,8 @@ session = DBSession()
 # Create anti-forgery state token
 @app.route('/login')
 def show_login():
-    state = ''.join(random.choice(string.ascii_uppercase + string.digits)
-                    for x in x.range(32))
+    state = ''.join(
+        random.choice(string.ascii_uppercase + string.digits) for x in range(32))
     login_session['state'] = state
     # return "The current session state is %s" % login_session['state']
     return render_template('login.html', STATE=state)
