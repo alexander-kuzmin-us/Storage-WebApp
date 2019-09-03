@@ -207,7 +207,7 @@ def g_disconnect():
 
 # JSON APIs to view AutoRepairCenter Information
 @app.route('/autorepaircenter/<int:autorepaircenter_id>/container/JSON')
-def autorepair_centercenter_container_json(autorepaircenter_id):
+def autorepair_center_container_json(autorepaircenter_id):
     autorepaircenter = session \
         .query(AutoRepairCenter) \
         .filter_by(id=autorepaircenter_id).one()
@@ -228,12 +228,12 @@ def container_item_json(autorepair_center_id, container_id):
 
 
 @app.route('/autorepaircenter/JSON')
-def autorepair_centercenters_json():
+def autorepair_centers_json():
     autorepaircenters = session.query(AutoRepairCenter).all()
     return jsonify(autorepaircenters=[r.serialize for r in autorepaircenters])
 
 
-# Show all Autorepair centercenters
+# Show all Autorepair centers
 @app.route('/')
 @app.route('/autorepaircenter/')
 def show_auto_repair_centers():
@@ -248,7 +248,7 @@ def show_auto_repair_centers():
             'autorepaircenters.html', autorepaircenters=autorepaircenters)
 
 
-# Create a new Autorepair centercenter
+# Create a new Autorepair center
 @app.route('/autorepaircenter/new/', methods=['GET', 'POST'])
 def new_auto_repair_center():
     if 'username' not in login_session:
@@ -268,7 +268,7 @@ def new_auto_repair_center():
         session.close()
 
 
-# Edit a Autorepair centercenter
+# Edit a Autorepair center
 @app.route(
     '/autorepaircenter/<int:autorepaircenter_id>/edit/',
     methods=['GET', 'POST'])
@@ -299,7 +299,7 @@ def edit_auto_repair_center(autorepaircenter_id):
             autorepaircenter=editedAutoRepairCenter)
 
 
-# Delete a Autorepair centercenter
+# Delete a Autorepair center
 @app.route(
     '/autorepaircenter/<int:autorepaircenter_id>/delete/',
     methods=['GET', 'POST'])
@@ -326,7 +326,7 @@ def delete_autorepair_center(autorepaircenter_id):
         session.close()
 
 
-# Show a Autorepair centercenter container
+# Show a Autorepair center container
 @app.route('/autorepaircenter/<int:autorepaircenter_id>/')
 @app.route('/autorepaircenter/<int:autorepaircenter_id>/container/')
 def show_container(autorepaircenter_id):
