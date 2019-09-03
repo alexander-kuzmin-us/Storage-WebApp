@@ -169,7 +169,7 @@ def get_user_id(email):
 
 
 # DISCONNECT - Revoke a current user's token and reset their login_session
-@app.route('/gdisconnect')
+@app.route('/g_disconnect')
 def g_disconnect():
     access_token = login_session.get('access_token')
     if access_token is None:
@@ -179,7 +179,7 @@ def g_disconnect():
                 'Current user not connected.'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
-    print('In gdisconnect access token is %s', access_token)
+    print('In g_disconnect access token is %s', access_token)
     print('User name is: ')
     print(login_session['username'])
     url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' \
@@ -254,17 +254,17 @@ def new_auto_repair_center():
     if 'username' not in login_session:
         return redirect('/login')
     if request.method == 'POST':
-        newAutoRepairCenter = AutoRepairCenter(
+        new_auto_repair_center = AutoRepairCenter(
             name=request
                 .form['name'], user_id=login_session['user_id'])
-        session.add(newAutoRepairCenter)
+        session.add(new_auto_repair_center)
         flash(
             'New Auto Repair Center %s Successfully Created' %
-            newAutoRepairCenter.name)
+            new_auto_repair_center.name)
         session.commit()
-        return redirect(url_for('showAutoRepairCenters'))
+        return redirect(url_for('show_auto_repair_centers'))
     else:
-        return render_template('newautorepaircenter.html')
+        return render_template('new_auto_repair_center.html')
         session.close()
 
 
@@ -288,7 +288,7 @@ def edit_auto_repair_center(autorepaircenter_id):
             flash(
                 'AutoRepairCenter Successfully Edited %s' %
                 editedAutoRepairCenter.name)
-            return redirect(url_for('showAutoRepairCenters'))
+            return redirect(url_for('show_auto_repair_centers'))
         else:
             return render_template(
                 'editautorepaircenter.html',
@@ -318,7 +318,7 @@ def delete_autorepair_center(autorepaircenter_id):
         flash('%s Successfully Deleted' % autorepaircenter_to_delete.name)
         session.commit()
         return redirect(url_for(
-            'showAutoRepairCenters', autorepaircenter_id=autorepaircenter_id))
+            'show_auto_repair_centers', autorepaircenter_id=autorepaircenter_id))
     else:
         return render_template(
             'deleteautorepaircenter.html',
@@ -371,7 +371,7 @@ def new_container_item(autorepaircenter_id):
         session.commit()
         flash('New Container %s Item Successfully Created' % (newItem.name))
         return redirect(url_for(
-            'showContainer', autorepaircenter_id=autorepaircenter_id))
+            'show_container', autorepaircenter_id=autorepaircenter_id))
     else:
         return render_template(
             'newcontaineritem.html', autorepaircenter_id=autorepaircenter_id)
@@ -408,7 +408,7 @@ def edit_container_item(autorepaircenter_id, container_id):
         session.commit()
         flash('Container Item Successfully Edited')
         return redirect(url_for(
-            'showContainer', autorepaircenter_id=autorepaircenter_id))
+            'show_container', autorepaircenter_id=autorepaircenter_id))
     else:
         return render_template(
             'editcontaineritem.html', autorepaircenter_id=autorepaircenter_id,
@@ -439,7 +439,7 @@ def delete_container_item(autorepaircenter_id, container_id):
         session.commit()
         flash('Container Item Successfully Deleted')
         return redirect(url_for(
-            'showContainer', autorepaircenter_id=autorepaircenter_id))
+            'show_container', autorepaircenter_id=autorepaircenter_id))
     else:
         return render_template('deletecontaineritem.html', item=itemToDelete)
         session.close()

@@ -33,7 +33,7 @@
 	<div class="row padding-top padding-bottom">
 		<div class="col-md-1"></div>
 		<div class="col-md-10 padding-none">
-			<a href="{{url_for('newAutoRepairCenter')}}">
+			<a href="{{url_for('new_auto_repair_center')}}">
 				<button class="btn btn-default" id="new-autorepaircenter">
 					<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>Add AutoRepairCenter
 				</button>
@@ -42,7 +42,7 @@
 		<div class="col-md-1"></div>
 	</div>
 	{% for autorepaircenter in autorepaircenters %}
-		<a href = "{{url_for('showContainer', autorepaircenter_id=autorepaircenter.id)}}">
+		<a href = "{{url_for('show_container', autorepaircenter_id=autorepaircenter.id)}}">
 			<div class="row">
 				<div class="col-md-1"></div>
 					<div class="col-md-10 autorepaircenter-list">
