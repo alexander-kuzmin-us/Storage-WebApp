@@ -411,7 +411,7 @@ def edit_container_item(autorepaircenter_id, container_id):
             'show_container', autorepaircenter_id=autorepaircenter_id))
     else:
         return render_template(
-            'editcontaineritem.html', autorepaircenter_id=autorepaircenter_id,
+            'edit_container_item.html', autorepaircenter_id=autorepaircenter_id,
             container_id=container_id, item=editedItem)
         session.close()
 
@@ -441,7 +441,7 @@ def delete_container_item(autorepaircenter_id, container_id):
         return redirect(url_for(
             'show_container', autorepaircenter_id=autorepaircenter_id))
     else:
-        return render_template('deletecontaineritem.html', item=itemToDelete)
+        return render_template('delete_container_item.html', item=itemToDelete)
         session.close()
 
 
