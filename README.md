@@ -1,4 +1,4 @@
-# **Project on  Udacity Full Stack Web Developer Nanodegree**
+# **Udacity Full Stack Web Developer Nanodegree Project**
 
 This project was designed as a data-driven web-based application (app).
 App allows registered by Googlesignin users create, edit and delete their notes, divided into categories.
