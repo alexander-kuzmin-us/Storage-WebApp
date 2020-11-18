@@ -1,7 +1,7 @@
 # **Udacity Full Stack Web Developer Nanodegree Project**
 
-This project was designed as a data-driven web-based application (app).
-App allows registered by Googlesignin users create, edit and delete their notes, divided into categories.
+This project was designed as a data-driven web-based application.
+App allows registered users create, edit and delete their notes, divided into categories.
 
 ## Software tools and skills used in this project:
 
@@ -25,11 +25,7 @@ App allows registered by Googlesignin users create, edit and delete their notes,
 - Vagrant
 - Asynchronous JavaScript
 
-## **This app is in Python written data driven web application contains of several parts:**
-
-1. app.py Python app with flask and sqlalchemy library
-2. Database, setted up by Python with sqlalchemy
-3. Templates and css files supported to easy user communication with the application through the web browser interface
+## **This app is data driven web application**
 
 ### **How to use**
 
