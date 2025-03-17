@@ -1,57 +1,154 @@
-# **Udacity Full Stack Web Developer Nanodegree Project**
+# Auto Repair Center Management System | Flask Web Application
 
-This project was designed as a data-driven web-based application.
-App allows registered users create, edit and delete their notes, divided into categories.
+![Auto Repair Center Management System](https://img.shields.io/badge/Project-Auto%20Repair%20Center-success)
+![License](https://img.shields.io/badge/License-MIT-blue)
+![Python](https://img.shields.io/badge/Python-3.7+-blue)
+![Flask](https://img.shields.io/badge/Flask-2.3.3-green)
 
-## Software tools and skills used in this project:
+## 🔧 Web-Based Auto Repair Center Management Solution
 
-- HTML
-- Python
-- JavaScript
+The Auto Repair Center Management System is a comprehensive web application that enables auto repair shop owners to organize their inventory and services efficiently. This application streamlines the process of managing auto repair centers, categorizing repair items, and tracking customer information.
+
+## ✨ Key Features
+
+- **Secure User Authentication** - Google OAuth integration for secure account management
+- **Personalized Dashboard** - Create and manage your own auto repair centers
+- **Category Organization** - Items categorized by Engine, Transmission, Tires, and Body
+- **Responsive Design** - Mobile-friendly interface for on-the-go management
+- **REST API Integration** - JSON endpoints for third-party application integration
+- **CRUD Operations** - Full Create, Read, Update, Delete functionality for items and centers
+
+## 🛠️ Technology Stack
+
+This project demonstrates proficiency in multiple technologies:
+
+- **Frontend**: HTML5, CSS3, JavaScript, Bootstrap 4
+- **Backend**: Python, Flask Web Framework
+- **Database**: SQLAlchemy ORM with SQLite
+- **Authentication**: Google OAuth 2.0
+- **API**: RESTful JSON API endpoints
+- **Infrastructure**: Vagrant, Unix/Linux
+
+## 📋 Installation & Setup
+
+Follow these steps to set up and run the application:
+
+### Prerequisites
+
+- Python 3.7 or higher
 - Git
-- GitHub
-- Unix shell
-- Application Programming Interfaces (API)
-- Relational Databases
-- Python Database API
-- SQL
-- PostgreSQL
-- HTTP
-- Transmission Control Protocol (TCP)
-- Servers
-- CRUD
-- Authentication
-- RESTful API
-- Vagrant
-- Asynchronous JavaScript
+- Vagrant (for development environment)
 
-## **This app is data driven web application**
+### Installation Steps
 
-### **How to use**
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/YourUsername/auto-repair-center.git
+   cd auto-repair-center
+   ```
 
-Download and unzip the files:
+2. **Set up virtual environment** (recommended):
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-1. Download [Vagrant](https://github.com/AleksanderKuzmin/storage.git)
+3. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-2. Check that the python is installed on your machine - run `python --version` in command line
+4. **Set up the database**:
+   ```bash
+   python database_setup.py
+   ```
 
-3. If you do not have a Python you can get in from  [Python.org](https://www.python.org/downloads/)
+5. **Configure Google OAuth**:
+   - Create a project in [Google Developer Console](https://console.developers.google.com/)
+   - Enable Google+ API
+   - Create OAuth credentials
+   - Download the client_secrets.json file and place it in the project root
 
-4. Open the project folder in terminal and run `python database_setup.py` to setup database_setup
+6. **Run the application**:
+   ```bash
+   python app.py
+   ```
 
-5. Then run `python app.py`
+7. **Access the application**:
+   Open your browser and navigate to [http://localhost:5000](http://localhost:5000)
 
-6. Open your browser and go to (http://localhost:5000/)
+## 🔒 Authentication & Authorization
 
+The application implements a secure authentication system using Google OAuth 2.0:
 
-### **Expected output:**
+- Users can register and login with their Google accounts
+- Each auto repair center is associated with its creator
+- Only authenticated owners can modify their own centers and items
+- Anti-forgery state tokens prevent cross-site request forgery
 
-1. You will be able to to register using your Google account
+## 📱 Application Features
 
-2. Create a new Autocenter and containers in it
+### For Visitors
+- View all auto repair centers
+- Browse items categorized by type
+- See details of repair services offered
 
-3. Create, edit and delete containers items
+### For Authenticated Users
+- Create personal auto repair centers
+- Add, edit, and delete items within your centers
+- Organize items by category (Engine, Transmission, Tires, Body)
+- Manage pricing and service descriptions
 
+## 🌐 API Endpoints
 
+The application provides RESTful JSON endpoints:
 
-_**Aleksandr Kuzmin**_
+- **GET /api/autorepaircenters** - List all auto repair centers
+- **GET /api/autorepaircenters/{id}** - Get a specific auto repair center
+- **GET /api/autorepaircenters/{id}/container** - List all items in a center
+- **GET /api/autorepaircenters/{id}/container/{item_id}** - Get a specific item
+
+## 🚀 Development & Deployment
+
+### Development Environment
+
+For developers, we recommend using Vagrant to ensure consistent development environments:
+
+```bash
+vagrant up
+vagrant ssh
+cd /vagrant
+python app.py
+```
+
+### Production Deployment
+
+For production deployment, consider:
+
+- Using a production-ready WSGI server like Gunicorn
+- Configuring a reverse proxy with Nginx
+- Using PostgreSQL instead of SQLite
+- Setting up HTTPS with Let's Encrypt
+- Implementing proper logging
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is open-source and available under the MIT License.
+
+## 📧 Contact
+
+**Aleksandr Kuzmin** - [GitHub Profile](https://github.com/AleksanderKuzmin)
+
+---
+
+*This Auto Repair Center Management System was created as part of the Udacity Full Stack Web Developer Nanodegree Program.*
