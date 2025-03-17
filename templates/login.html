@@ -1,56 +1,79 @@
-<head>
-    <title>Auto Repair Center</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
-    <script>
-      function start() {
-        gapi.load('auth2', function () {
-          auth2 = gapi.auth2.init({
-            client_id: '462283270013-4l8lmtsrefrernp61ipu1s89tqqbsdcd.apps.googleusercontent.com',
-            scope: 'profile',
-            redirecturi: "postmessage",
-            callback: "signInCallback",
-            cookiepolicy: "single_host_origin",
-            approvalprompt: "force"
-          });
-        });
-      }
-    </script>
-</head>
+{% extends "layout.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2 text-center">
+        <h1 class="mt-5 mb-4">Auto Repair Center</h1>
+        <div class="card shadow-sm">
+            <div class="card-body p-5">
+                <h2 class="mb-4">Please Sign In</h2>
+                <p class="mb-4">Sign in with your Google account to manage auto repair centers and their contents.</p>
+                
+                <button id="signinButton" class="btn btn-primary btn-lg">
+                    <i class="fab fa-google mr-2"></i> Sign in with Google
+                </button>
+                
+                <div id="result" class="mt-4"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<body>
-
-    <button id="signinButton">Google Signin</button>
-
-    <div id="result"></div>
-
-    <script>
-      $('#signinButton').click(function () {
-        function signInCallback(authResult) {
-          if (authResult['code']) {
-            $('#signinButton').attr('style', 'display:none');
-            $.ajax({
-              type: 'POST',
-              url: '/gconnect?state={{STATE}}',
-              processData: false,
-              data: authResult['code'],
-              contentType: 'application/octet-stream; charset=utf-8',
-              success: function (result) {
-                if (result) {
-                  $('#result').html('Login Successful!</br>' + result + '</br>Redirecting...');
-                  setTimeout(function () {
-                    window.location.href = "/autorepaircenter";
-                  }, 4000);
-                } else if (authResult['error']) {
-                  console.log('There was an error: ' + authResult['error']);
-                } else {
-                  $('#result').html('Failed to make a server-side call. Check your configuration and console.');
-                }
-              }
+<script>
+    // Load the Google API
+    function start() {
+        gapi.load('auth2', function() {
+            auth2 = gapi.auth2.init({
+                client_id: '462283270013-4l8lmtsrefrernp61ipu1s89tqqbsdcd.apps.googleusercontent.com',
+                scope: 'profile',
+                redirecturi: "postmessage",
+                callback: "signInCallback",
+                cookiepolicy: "single_host_origin",
+                approvalprompt: "force"
             });
-          }
+        });
+    }
+
+    // Click handler for the signin button
+    $('#signinButton').click(function() {
+        function signInCallback(authResult) {
+            if (authResult['code']) {
+                $('#signinButton').prop('disabled', true).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Signing in...');
+                
+                $.ajax({
+                    type: 'POST',
+                    url: '/gconnect?state={{STATE}}',
+                    processData: false,
+                    data: authResult['code'],
+                    contentType: 'application/octet-stream; charset=utf-8',
+                    success: function(result) {
+                        if (result) {
+                            $('#result').html('<div class="alert alert-success">' +
+                                'Login Successful!<br>' + result + '<br>Redirecting...</div>');
+                            setTimeout(function() {
+                                window.location.href = "/autorepaircenters";
+                            }, 4000);
+                        } else if (authResult['error']) {
+                            $('#signinButton').prop('disabled', false).html('<i class="fab fa-google mr-2"></i> Sign in with Google');
+                            $('#result').html('<div class="alert alert-danger">Error during authentication. Please try again.</div>');
+                            console.log('There was an error: ' + authResult['error']);
+                        }
+                    },
+                    error: function() {
+                        $('#signinButton').prop('disabled', false).html('<i class="fab fa-google mr-2"></i> Sign in with Google');
+                        $('#result').html('<div class="alert alert-danger">Failed to make a server-side call. Check your configuration and console.</div>');
+                    }
+                });
+            }
         }
-        auth2.grantOfflineAccess().then(signInCallback);
-      })
-    </script>
-</body>
+        
+        try {
+            auth2.grantOfflineAccess().then(signInCallback);
+        } catch (e) {
+            $('#result').html('<div class="alert alert-warning">Google Sign-In API not loaded. Please try again in a moment.</div>');
+            console.log('Google auth API issue: ', e);
+        }
+    });
+</script>
+
+<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+{% endblock %}
