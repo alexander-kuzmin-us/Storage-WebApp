@@ -99,7 +99,7 @@ The application implements a secure authentication system using Google OAuth 2.0
 - Organize items by category (Engine, Transmission, Tires, Body)
 - Manage pricing and service descriptions
 
-## 🌐 API Endpoints
+## 🌐 API Endpoints:
 
 The application provides RESTful JSON endpoints:
 
